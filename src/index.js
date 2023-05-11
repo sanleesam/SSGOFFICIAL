@@ -1,20 +1,41 @@
-require("dotenv").config();
-const { Client, IntentsBitField, ActivityType } = require("discord.js");
-
+const {
+  Client,
+  GatewayIntentBits,
+  Partials,
+  Collection,
+} = require("discord.js");
 const client = new Client({
   intents: [
-    IntentsBitField.Flags.Guilds,
-    IntentsBitField.Flags.GuildMembers,
-    IntentsBitField.Flags.GuildMessages,
-    IntentsBitField.Flags.MessageContent,
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildPresences,
+    GatewayIntentBits.GuildMessageReactions,
+    GatewayIntentBits.DirectMessages,
+    GatewayIntentBits.MessageContent,
+  ],
+  partials: [
+    Partials.Channel,
+    Partials.Message,
+    Partials.User,
+    Partials.GuildMember,
+    Partials.Reaction,
   ],
 });
 
-client.on("ready", (c) => {
-  client.user.setActivity({
-    name: "Sub To Sanlee",
-    type: ActivityType.Listening,
-  });
+const fs = require("fs");
+const config = require("./config.json");
+require("dotenv").config();
+
+client.commands = new Collection();
+client.aliases = new Collection();
+client.slashCommands = new Collection();
+client.buttons = new Collection();
+client.prefix = config.prefix;
+
+module.exports = client;
+
+fs.readdirSync("./src/handlers").forEach((handler) => {
+  require(`./handlers/${handler}`)(client);
 });
 
 client.login(process.env.TOKEN);
