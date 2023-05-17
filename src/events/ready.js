@@ -30,4 +30,21 @@ client.on("ready", () => {
     s++;
   }, 30000);
   console.log(chalk.red(`Logged in as ${client.user.tag}!`));
+
+  const voiceChannelId = "1108347868516986911"; // Replace with the ID of the voice channel you want to update
+  const guildId = "1108347867782987836"; // Replace with the ID of your server/guild
+  const guild = client.guilds.cache.get(guildId);
+  const voiceChannel = guild.channels.cache.get(voiceChannelId);
+
+  setInterval(() => {
+    const memberCount = guild.memberCount;
+    voiceChannel.setName(`All Members: ${memberCount}`);
+  }, 10000); // Update every 5 minutes
+
+  client.on("voiceStateUpdate", (oldState, newState) => {
+    if (newState.channel && newState.channel.id === voiceChannelId) {
+      const memberCount = guild.memberCount;
+      voiceChannel.setName(`All Members: ${memberCount}`);
+    }
+  });
 });
