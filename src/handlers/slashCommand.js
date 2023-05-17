@@ -53,9 +53,7 @@ module.exports = (client) => {
   (async () => {
     try {
       await rest.put(
-        process.env.GUILD_ID
-          ? Routes.applicationGuildCommands(CLIENT_ID, process.env.GUILD_ID)
-          : Routes.applicationCommands(CLIENT_ID),
+          Routes.applicationCommands(CLIENT_ID),
         { body: slashCommands }
       );
       console.log(chalk.yellow("Slash Commands • Registered"));
