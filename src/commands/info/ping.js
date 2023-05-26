@@ -1,11 +1,8 @@
-const { Client, Message } = require("discord.js");
+const { Message, Client } = require("discord.js");
 
 module.exports = {
   name: "ping",
-  description: "Check bot's ping.",
-  cooldown: 3000,
-  userPerms: [],
-  botPerms: [],
+  aliases: ["p"],
   /**
    *
    * @param {Client} client
@@ -13,7 +10,6 @@ module.exports = {
    * @param {String[]} args
    */
   run: async (client, message, args) => {
-    const msg = await message.reply("Pinging...");
-    await msg.edit(`Pong! **${client.ws.ping} ms**`);
+    message.channel.send(`${client.ws.ping} ws ping`);
   },
 };

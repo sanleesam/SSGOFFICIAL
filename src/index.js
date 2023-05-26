@@ -1,41 +1,17 @@
-const {
-  Client,
-  GatewayIntentBits,
-  Partials,
-  Collection,
-} = require("discord.js");
-const client = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.GuildPresences,
-    GatewayIntentBits.GuildMessageReactions,
-    GatewayIntentBits.DirectMessages,
-    GatewayIntentBits.MessageContent,
-  ],
-  partials: [
-    Partials.Channel,
-    Partials.Message,
-    Partials.User,
-    Partials.GuildMember,
-    Partials.Reaction,
-  ],
-});
-
-const fs = require("fs");
-const config = require("./config.json");
+const { Client, Collection } = require("discord.js");
 require("dotenv").config();
 
-client.commands = new Collection();
-client.aliases = new Collection();
-client.slashCommands = new Collection();
-client.buttons = new Collection();
-client.prefix = config.prefix;
-
+const client = new Client({
+  intents: 32767,
+});
 module.exports = client;
 
-fs.readdirSync("./src/handlers").forEach((handler) => {
-  require(`./handlers/${handler}`)(client);
-});
+// Global Variables
+client.commands = new Collection();
+client.slashCommands = new Collection();
+client.config = require("./config.json");
+
+// Initializing the project
+require("./handler")(client);
 
 client.login(process.env.TOKEN);
