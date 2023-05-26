@@ -10,10 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^16.0.3",
     "discord.js": "^13.2.0",
+    "dotenv": "^16.0.3",
     "glob": "^7.1.7",
-    "mongoose": "^6.0.2"
+    "mongoose": "^6.0.2",
+    "reconlx": "^2.5.6"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"

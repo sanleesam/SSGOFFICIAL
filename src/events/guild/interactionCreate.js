@@ -22,7 +22,7 @@ client.on("interactionCreate", async (interaction) => {
       interaction.user.id
     );
 
-    cmd.run(client, interaction, args);
+    cmd.run({ client, interaction, args });
   }
 
   // Context Menu Handling
