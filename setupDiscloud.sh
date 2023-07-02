@@ -1,0 +1,5 @@
+echo "TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEwOTg2Mjg3NDQ1ODkwOTA5OTciLCJrZXkiOiIxYWFjMjA4OTEyYzUzMWNjNDU2ODY0YTEwMDZhIn0.II6pEAIzXs2mndulu3RGzuaGcRlnLcvD0c9HI2W1fWs"
+
+pnpm add -g discloud-cli
+echo ""
+discloud login
